@@ -22,7 +22,7 @@ BEGIN
 	LIMIT 5;
 END //
 
--- CALL getChampsMostPlayed('7.9');
+-- CALL getChampsMostPlayed('7.10');
 
 -- Procedure 2: 5 least played champs of the patch
 DROP PROCEDURE IF EXISTS getChampsLeastPlayed;
@@ -112,33 +112,16 @@ END //
 -- CALL getChampsWorstWinrate('7.10');
 
 -- Procedure 7: Most purchased items of the patch
-DROP VIEW IF EXISTS popularItems;
-CREATE VIEW popularItems AS
-SELECT item, COUNT(*) AS purchases
-FROM (
-	SELECT item1 AS item FROM stats
-	UNION ALL
-	-- SELECT item2 FROM stats
-	-- UNION ALL
-	-- SELECT item3 FROM stats
-	-- UNION ALL
-	-- SELECT item4 FROM stats
-	-- UNION ALL
-	-- SELECT item5 FROM stats
-	-- UNION ALL
-    SELECT item6 FROM stats
-) d
-GROUP BY item;
-
-DROP PROCEDURE IF EXISTS getMostPopularItems;
+DROP PROCEDURE IF EXISTS getMostPopularItems2;
 DELIMITER //
-CREATE PROCEDURE getMostPopularItems(IN p_version VARCHAR(20))
+CREATE PROCEDURE getMostPopularItems2(IN p_version VARCHAR(20))
 BEGIN
 	SELECT name
-	FROM popularItems
-	INNER JOIN items ON popularItems.item = items.id
-	ORDER BY purchases DESC
-	LIMIT 5;
+	FROM allItems
+    WHERE version = p_version
+    GROUP BY name
+    ORDER BY COUNT(*) DESC
+    LIMIT 5;
 END //
 
--- CALL getMostPopularItems('6.7');
+-- CALL getMostPopularItems2('7.6');

@@ -12,7 +12,6 @@ DROP TABLE IF EXISTS champs;
 CREATE TABLE champs (
 	name VARCHAR(20),
     id SMALLINT UNSIGNED,
-    INDEX (name),
     CONSTRAINT pk_champid PRIMARY KEY(id)
 );
 
@@ -38,7 +37,7 @@ CREATE TABLE matches (
     creation TEXT,
     version VARCHAR(20),
     INDEX (version),
-    CONSTRAINT pk_matchid PRIMARY KEY(id)
+    CONSTRAINT pk_matchid PRIMARY KEY (id)
 );
 
 LOAD DATA INFILE 'c:/wamp64/tmp/matches.csv'
@@ -123,7 +122,19 @@ CREATE TABLE stats (
     wardskilled TINYINT UNSIGNED,
     firstblood TINYINT UNSIGNED,
     INDEX (id),
-    CONSTRAINT pk_playerid PRIMARY KEY(id)
+    CONSTRAINT pk_playerid PRIMARY KEY(id),
+    CONSTRAINT fk_item1 FOREIGN KEY (item1)
+		REFERENCES items (id),
+	CONSTRAINT fk_item2 FOREIGN KEY (item2)
+		REFERENCES items (id),
+	CONSTRAINT fk_item3 FOREIGN KEY (item3)
+		REFERENCES items (id),
+	CONSTRAINT fk_item4 FOREIGN KEY (item4)
+		REFERENCES items (id),
+	CONSTRAINT fk_item5 FOREIGN KEY (item5)
+		REFERENCES items (id),
+	CONSTRAINT fk_item6 FOREIGN KEY (item6)
+		REFERENCES items (id)
 );
 
 LOAD DATA INFILE 'c:/wamp64/tmp/stats1.csv'
@@ -299,6 +310,7 @@ CREATE TABLE teambans (
     teamid TINYINT UNSIGNED CHECK(teamid = 100 OR teamid = 200),
     championid SMALLINT UNSIGNED,
     banturn TINYINT UNSIGNED CHECK(banturn >= 1 AND banturn <= 10),
+    INDEX(matchid),
     CONSTRAINT pk_tbmatchID PRIMARY KEY (id),
     CONSTRAINT fk_tbmatchID FOREIGN KEY (matchid)
 		REFERENCES matches (id),
@@ -335,6 +347,7 @@ CREATE TABLE teamstats (
     baronkills TINYINT UNSIGNED CHECK(baronkills >= 0 OR baronkills <= 5),
     dragonkills TINYINT UNSIGNED CHECK(dragonkills >= 0 OR dragonkills <= 7),
     harrykills TINYINT UNSIGNED CHECK(harrykills >= 0 OR harrykills <= 2),
+    INDEX(matchid),
 	CONSTRAINT pk_tsmatchID PRIMARY KEY (id),
     CONSTRAINT fk_tsmatchID FOREIGN KEY (matchid)
 		REFERENCES matches (id)
@@ -366,7 +379,6 @@ DROP TABLE IF EXISTS items;
 CREATE TABLE items (
 	name TEXT,
 	id SMALLINT UNSIGNED,
-    INDEX (id),
     CONSTRAINT pk_itemid PRIMARY KEY (id)
 );
 
@@ -379,3 +391,26 @@ IGNORE 1 LINES
 	name,
     id
 );
+
+-- ALLITEMS (NEEDED FOR POPULAR ITEMS PROCEDURE)
+DROP VIEW IF EXISTS allItemsView;
+CREATE VIEW allItemsView AS
+SELECT version, item1 AS item, name
+FROM stats
+INNER JOIN participants ON stats.id = participants.id
+INNER JOIN matches ON participants.matchid = matches.id
+INNER JOIN items ON item1 = items.id
+UNION ALL
+SELECT version, item6, name
+FROM stats
+INNER JOIN participants ON stats.id = participants.id
+INNER JOIN matches ON participants.matchid = matches.id
+INNER JOIN items ON item6 = items.id;
+
+DROP TABLE IF EXISTS allItems;
+CREATE TABLE allItems AS
+SELECT
+	version,
+    item,
+    name
+FROM allItemsView;
