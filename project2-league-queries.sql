@@ -1,9 +1,13 @@
+-- League Historan Application: Stored Procedures
+-- Derek Pang and Robert Holmes
+-- CS 3265 01
+
 -- Query to get all distinct patches from the dataset
 SELECT DISTINCT version
 FROM matches
 ORDER BY INET_ATON(SUBSTRING_INDEX(CONCAT(version, '0.0'),'.',4)) DESC;
 
--- Top 5 most played champs of the patch
+-- Procedure 1: 5 most played champs of the patch
 DROP PROCEDURE IF EXISTS getChampsMostPlayed;
 DELIMITER //
 CREATE PROCEDURE getChampsMostPlayed(IN p_version VARCHAR(20))
@@ -18,9 +22,9 @@ BEGIN
 	LIMIT 5;
 END //
 
-CALL getChampsMostPlayed('7.10');
+-- CALL getChampsMostPlayed('7.9');
 
--- Top 5 less played champs of the patch
+-- Procedure 2: 5 least played champs of the patch
 DROP PROCEDURE IF EXISTS getChampsLeastPlayed;
 DELIMITER //
 CREATE PROCEDURE getChampsLeastPlayed(IN p_version VARCHAR(20))
@@ -35,9 +39,9 @@ BEGIN
 	LIMIT 5;
 END //
 
-CALL getChampsLeastPlayed('7.9');
+-- CALL getChampsLeastPlayed('7.9');
 
--- Top 5 most banned champs of the patch
+-- Procedure 3: 5 most frequently banned champs of the patch
 DROP PROCEDURE IF EXISTS getChampsMostBanned;
 DELIMITER //
 CREATE PROCEDURE getChampsMostBanned(IN p_version VARCHAR(20))
@@ -52,9 +56,9 @@ BEGIN
 	LIMIT 5;
 END //
 
-CALL getChampsMostBanned('7.10');
+-- CALL getChampsMostBanned('7.10');
 
--- Top 5 least banned champs of the patch
+-- Procedure 4: 5 least frequently banned champs of the patch
 DROP PROCEDURE IF EXISTS getChampsLeastBanned;
 DELIMITER //
 CREATE PROCEDURE getChampsLeastBanned(IN p_version VARCHAR(20))
@@ -69,9 +73,9 @@ BEGIN
 	LIMIT 5;
 END //
 
-CALL getChampsLeastBanned('7.10');
+-- CALL getChampsLeastBanned('7.9');
 
--- Highest win rate champs of the patch
+-- Procedure 5: 5 highest winrate champs of the patch
 DROP PROCEDURE IF EXISTS getChampsBestWinrate;
 DELIMITER //
 CREATE PROCEDURE getChampsBestWinrate(IN p_version VARCHAR(20))
@@ -87,9 +91,9 @@ BEGIN
     LIMIT 5;
 END //
 
-CALL getChampsBestWinrate('7.10');
+-- CALL getChampsBestWinrate('7.9');
 
--- Lowest win rate champs of the patch
+-- Procedure 6: 5 lowest win rate champs of the patch
 DROP PROCEDURE IF EXISTS getChampsWorstWinrate;
 DELIMITER //
 CREATE PROCEDURE getChampsWorstWinrate(IN p_version VARCHAR(20))
@@ -105,23 +109,23 @@ BEGIN
     LIMIT 5;
 END //
 
-CALL getChampsWorstWinrate('7.10');
+-- CALL getChampsWorstWinrate('7.10');
 
--- Most used items of the patch
+-- Procedure 7: Most purchased items of the patch
 DROP VIEW IF EXISTS popularItems;
 CREATE VIEW popularItems AS
 SELECT item, COUNT(*) AS purchases
 FROM (
 	SELECT item1 AS item FROM stats
 	UNION ALL
-	SELECT item2 FROM stats
-	UNION ALL
-	SELECT item3 FROM stats
-	UNION ALL
-	SELECT item4 FROM stats
-	UNION ALL
-	SELECT item5 FROM stats
-	UNION ALL
+	-- SELECT item2 FROM stats
+	-- UNION ALL
+	-- SELECT item3 FROM stats
+	-- UNION ALL
+	-- SELECT item4 FROM stats
+	-- UNION ALL
+	-- SELECT item5 FROM stats
+	-- UNION ALL
     SELECT item6 FROM stats
 ) d
 GROUP BY item;
@@ -130,17 +134,11 @@ DROP PROCEDURE IF EXISTS getMostPopularItems;
 DELIMITER //
 CREATE PROCEDURE getMostPopularItems(IN p_version VARCHAR(20))
 BEGIN
-	SELECT item, name, purchases
+	SELECT name
 	FROM popularItems
 	INNER JOIN items ON popularItems.item = items.id
 	ORDER BY purchases DESC
 	LIMIT 5;
 END //
 
-CALL getMostPopularItems('7.10');
-
-
-
-
-
-
+-- CALL getMostPopularItems('6.7');
