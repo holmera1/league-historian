@@ -1,3 +1,8 @@
+-- League Historan Application: Database and Table Creation
+-- Derek Pang and Robert Holmes
+-- CS 3265 01
+-- Warning: Error will occur when trying to load data into tables without csv files in wamp64/tmp directory
+
 DROP DATABASE IF EXISTS league;
 CREATE DATABASE league;
 USE league;
@@ -52,12 +57,13 @@ IGNORE 1 LINES
     version
 );
 
--- Trim version numbers
+-- Trim version numbers: run the following 3 lines to format version attribute in matches table
 SET SQL_SAFE_UPDATES =  0;
 UPDATE matches
 SET version = LEFT(version, 5), version = SUBSTR(version, 2), version = TRIM(TRAILING '.' FROM version);
 
 -- STATS
+-- for the stats table, there are 2 separate csv files, each of which is loaded in separately
 DROP TABLE IF EXISTS stats;
 CREATE TABLE stats (
 	id MEDIUMINT UNSIGNED,
@@ -116,6 +122,7 @@ CREATE TABLE stats (
     wardsplaced TINYINT UNSIGNED,
     wardskilled TINYINT UNSIGNED,
     firstblood TINYINT UNSIGNED,
+    INDEX (id),
     CONSTRAINT pk_playerid PRIMARY KEY(id)
 );
 
@@ -258,6 +265,7 @@ CREATE TABLE participants (
     ss2 TINYINT UNSIGNED,
     role VARCHAR(15),
     position VARCHAR(15),
+    INDEX (matchid),
     CONSTRAINT pk_participantID PRIMARY KEY (id),
     CONSTRAINT fk_participantID FOREIGN KEY (id)
 		REFERENCES stats (id),
@@ -358,6 +366,7 @@ DROP TABLE IF EXISTS items;
 CREATE TABLE items (
 	name TEXT,
 	id SMALLINT UNSIGNED,
+    INDEX (id),
     CONSTRAINT pk_itemid PRIMARY KEY (id)
 );
 
