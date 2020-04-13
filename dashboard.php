@@ -1,7 +1,8 @@
 <?php
     require_once("conn.php");
+    include("functions.php");
 
-    $query = "SELECT DISTINCT version FROM Matches ORDER BY INET_ATON(SUBSTRING_INDEX(CONCAT(version, '0.0'),'.',4)) DESC";
+    $query = "SELECT DISTINCT version FROM Matches ORDER BY INET_ATON(SUBSTRING_INDEX(CONCAT(version, '0.0'),'.',4)) ASC";
 
     try
     {
@@ -14,37 +15,6 @@
     { // Error in database processing.
       echo $sql . "<br>" . $error->getMessage(); // HTTP 500 - Internal Server Error
     }
-
-  function getMPChamps($patchVersion) {
-    $dbhost = '127.0.0.1';
-    $dbuname = 'root';
-    $dbpass = '';
-    $dbname = 'league';
-
-    $beemo = new PDO('mysql:host=' . $dbhost . ';port=3306;dbname=' . $dbname, $dbuname, $dbpass);
-
-    $query2 = "CALL getChampsMostPlayed(" . $patchVersion. ")";
-
-    //$query2 = "CALL getChampsMostPlayed("."7.10".")";
-    try
-    {
-      ini_set('max_execution_time', 300);
-      $mostPlayed_stmt = $beemo->prepare($query2);
-      $mostPlayed_stmt->execute();
-      $champsMP = $mostPlayed_stmt->fetchAll();
-
-    }
-    catch (PDOException $ex)
-    { // Error in database processing.
-      echo $sql . "<br>" . $error->getMessage(); // HTTP 500 - Internal Server Error
-    }
-
-    if ($champsMP && $mostPlayed_stmt->rowCount() > 0) {
-      foreach ($champsMP as $row) {
-        echo $row['name'] . "<br>";
-      }   
-    } 
-  }
 ?>
 
 
@@ -90,6 +60,12 @@
       $selected_val = $_POST['myPatch'];
       echo "You have selected patch" . $selected_val . "<br>";
       getMPChamps($selected_val);
+      getLPChamps($selected_val);
+      getMBChamps($selected_val);
+      getLBChamps($selected_val);
+      getBWChamps($selected_val);
+      getWWChamps($selected_val);
+      getMPItems($selected_val);
     }
   ?>
   </div>
