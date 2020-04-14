@@ -12,7 +12,7 @@ This README will document the basic environment setup needed in order to recreat
 3.	Turn on your Apache server and your MySQL servers. (These must be on or you will not be able to recreate the running project.)
 4.	Open the file named project2-final.sql within MySQL Workbench.
 5.	Scroll down to the Data Insertion section of the SQL database code.
->Note that this starts at line 168 and ends at line 397.
+>Note that this starts at line 168 and ends at line 421.
 6.	For all of the load statements, change the directories where you are loading the files to the absolute path of the location of where your csv files currently are on your local machine.
 >If you forget to do this step or ignore this step, MySQL Workbench will throw errors and the dataset will not be loaded into your local machine.
 7.	Attempt to execute all queries within the file using MySQL Workbench.

@@ -207,6 +207,12 @@ IGNORE 1 LINES
     version
 );
 
+-- EXTREMELY IMPORTANT!!!!
+-- Trim version: run the following 3 lines to format the version attribute in matches table
+SET SQL_SAFE_UPDATES =  0;
+UPDATE matches
+SET version = LEFT(version, 5), version = SUBSTR(version, 2), version = TRIM(TRAILING '.' FROM version);
+
 -- STATS
 -- for the stats table, there are 2 separate csv files, each of which is loaded in separately
 LOAD DATA INFILE 'c:/wamp64/tmp/stats1.csv'
@@ -419,12 +425,6 @@ FROM allItemsView;
 -- League Historan Application: Stored Procedures
 -- Derek Pang and Robert Holmes
 -- CS 3265-01
-
--- EXTREMELY IMPORTANT!!!!
--- Trim version: run the following 3 lines to format the version attribute in matches table
-SET SQL_SAFE_UPDATES =  0;
-UPDATE matches
-SET version = LEFT(version, 5), version = SUBSTR(version, 2), version = TRIM(TRAILING '.' FROM version);
 
 -- Query to get all distinct patches from the dataset
 SELECT DISTINCT version
