@@ -1,0 +1,107 @@
+body {
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top: 20px;
+	text-align: left;
+	font-size: 18px;
+}
+
+#lologo {
+	float: right;
+}
+
+#header {
+	text-align: left;
+	font-size: 32x;
+	padding-left:20px;
+}
+
+#subheader {
+	font-size: 20x;
+}
+
+#container {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+#dropdown  {
+	text-align: left;
+	padding-bottom: 20px;
+	padding-left:20px;
+}
+
+#result11 {
+	width: 33%;
+	float: left;
+}
+
+#result12 {
+	width: 33%;
+	float: left;
+}
+
+
+#result13 {
+	width: 33%;
+	float: right;
+}
+
+#result {
+	padding: 10px;
+	padding-bottom: 20px;
+}
+
+#result1 {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-right: 30px;
+	padding-left:20px;
+}
+
+#result2 {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-right: 30px;
+	padding-left:20px;
+}
+
+#result3 {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-right: 30px;
+	padding-left:20px;
+}
+
+#result4 {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-right: 30px;
+	padding-left:20px;
+}
+
+#result5 {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-right: 30px;
+	padding-left:20px;
+}
+
+#result6 {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-right: 30px;
+	padding-left:20px;
+}
+
+#result7 {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-right: 30px;
+	padding-left:20px;
+}
+
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}

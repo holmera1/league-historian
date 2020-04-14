@@ -25,23 +25,15 @@ try {
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
-
-
-    <style type="text/css" media="screen">
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
-<div class="dashboard">
-
-    <h1>League Historian</h1>
-    <div class="container">
-        <h1 style="margin-top:0px;">Select Patch Version</h1>
-        <form method="post">
-
-
+<div id="dashboard">
+    <img src="media/logo.png" id="lologo" height="100" widht="400">
+    <h1 id="header">League of Legends Historian</h1>
+    <div id="container">
+        <form method="post" id="dropdown">
             <select name="myPatch">
-
                 <option value="-1" selected disabled>-Select Patch Version-</option>
 
                 <?php if ($result && $prepared_stmt->rowCount() > 0) {
@@ -55,19 +47,64 @@ try {
             <input type="submit" name="submit" value="Submit">
 
         </form>
-
-        <?php if (isset($_POST['myPatch'])) {
-            $selected_val = $_POST['myPatch'];
-            echo "You have selected patch " . $selected_val . "<br>" . "<br>";
-            getMPChamps($selected_val);
-            getLPChamps($selected_val);
-            getMBChamps($selected_val);
-            getLBChamps($selected_val);
-            getBWChamps($selected_val);
-            getWWChamps($selected_val);
-            getMPItems($selected_val);
-        }
-        ?>
+        <div id="container2">
+            <div id="result11">
+                <div id="result1">
+                <?php if (isset($_POST['myPatch'])) {
+                    $selected_val = $_POST['myPatch'];
+                    getMPChamps($selected_val);
+                }
+                ?>
+                </div>
+                <div id="result4">
+                <?php if (isset($_POST['myPatch'])) {
+                    $selected_val = $_POST['myPatch'];
+                    getLBChamps($selected_val);
+                }
+                ?>
+                </div>
+                <div id="result7">
+                <?php if (isset($_POST['myPatch'])) {
+                    $selected_val = $_POST['myPatch'];
+                    getMPItems($selected_val);
+                }
+                ?>
+                </div>
+            </div>
+            <div id="result12">
+                <div id="result2">
+                <?php if (isset($_POST['myPatch'])) {
+                    $selected_val = $_POST['myPatch'];
+                    getLPChamps($selected_val);
+                }
+                ?>
+                 </div>
+                <div id="result5">
+                <?php if (isset($_POST['myPatch'])) {
+                    $selected_val = $_POST['myPatch'];
+                    getBWChamps($selected_val);
+                }
+                ?>
+                </div>
+            </div>
+            <div id="result13">
+                <div id="result3">
+                <?php if (isset($_POST['myPatch'])) {
+                    $selected_val = $_POST['myPatch'];
+                    
+                    getMBChamps($selected_val);
+                }
+                ?>
+                </div>
+                <div id="result6">
+                <?php if (isset($_POST['myPatch'])) {
+                    $selected_val = $_POST['myPatch'];
+                    getWWChamps($selected_val);
+                }
+                ?>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

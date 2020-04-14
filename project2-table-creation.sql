@@ -140,19 +140,7 @@ CREATE TABLE stats (
     wardskilled TINYINT UNSIGNED,
     firstblood TINYINT UNSIGNED,
     INDEX (id),
-    CONSTRAINT pk_playerid PRIMARY KEY(id),
-    CONSTRAINT fk_item1 FOREIGN KEY (item1)
-		REFERENCES items (id),
-	CONSTRAINT fk_item2 FOREIGN KEY (item2)
-		REFERENCES items (id),
-	CONSTRAINT fk_item3 FOREIGN KEY (item3)
-		REFERENCES items (id),
-	CONSTRAINT fk_item4 FOREIGN KEY (item4)
-		REFERENCES items (id),
-	CONSTRAINT fk_item5 FOREIGN KEY (item5)
-		REFERENCES items (id),
-	CONSTRAINT fk_item6 FOREIGN KEY (item6)
-		REFERENCES items (id)
+    CONSTRAINT pk_playerid PRIMARY KEY(id)
 );
 
 LOAD DATA INFILE 'c:/wamp64/tmp/stats1.csv'

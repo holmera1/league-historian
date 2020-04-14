@@ -20,8 +20,8 @@ function getMPChamps($patchVersion)
         echo $sql . "<br>" . $error->getMessage(); // HTTP 500 - Internal Server Error
     }
     if ($champsMP && $mostPlayed_stmt->rowCount() > 0) { ?>
-        <table>
-            <thead> Most Played Champions of the Patch
+        <table id="table">
+            <thead><?php echo "Most Played Champions of Patch " . $patchVersion; ?>
             <tr>
                 <th>Rank</th>
                 <th>Champion</th>
@@ -66,7 +66,7 @@ function getLPChamps($patchVersion)
     }
     if ($champsLP && $leastPlayed_stmt->rowCount() > 0) { ?>
         <table>
-            <thead> Least Played Champions of the Patch
+            <thead><?php echo "Least Played Champions of Patch " . $patchVersion; ?>
             <tr>
                 <th>Rank</th>
                 <th>Champion</th>
@@ -111,7 +111,7 @@ function getMBChamps($patchVersion)
     }
     if ($champsMB && $mostBanned_stmt->rowCount() > 0) { ?>
         <table>
-            <thead> Most Banned Champions of the Patch
+            <thead><?php echo "Most Banned Champions of Patch " . $patchVersion; ?>
             <tr>
                 <th>Rank</th>
                 <th>Champion</th>
@@ -156,7 +156,7 @@ function getLBChamps($patchVersion)
     }
     if ($champsLB && $leastBanned_stmt->rowCount() > 0) { ?>
         <table>
-            <thead> Least Banned Champions of the Patch
+            <thead><?php echo "Least Banned Champions of Patch " . $patchVersion; ?>
             <tr>
                 <th>Rank</th>
                 <th>Champion</th>
@@ -201,7 +201,7 @@ function getBWChamps($patchVersion)
     }
     if ($champsBW && $bestWin_stmt->rowCount() > 0) { ?>
         <table>
-            <thead> Highest Winrate Champions of the Patch
+            <thead><?php echo "Highest Winrate Champions of Patch " . $patchVersion; ?>
             <tr>
                 <th>Rank</th>
                 <th>Champion</th>
@@ -246,7 +246,7 @@ function getWWChamps($patchVersion)
     }
     if ($champsWW && $worstWin_stmt->rowCount() > 0) { ?>
         <table>
-            <thead> Lowest Winrate Champions of the Patch
+            <thead><?php echo "Lowest Winrate Champions of Patch " . $patchVersion; ?>
             <tr>
                 <th>Rank</th>
                 <th>Champion</th>
@@ -291,7 +291,7 @@ function getMPItems($patchVersion)
     }
     if ($itemsMP && $itemsMP_stmt->rowCount() > 0) { ?>
         <table>
-            <thead> Most Popular Items of the Patch
+            <thead><?php echo "Most Popular Items of Patch " . $patchVersion; ?>
             <tr>
                 <th>Rank</th>
                 <th>Item</th>
