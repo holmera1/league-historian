@@ -1,5 +1,6 @@
 <?php
-function getMPChamps($patchVersion) {
+function getMPChamps($patchVersion)
+{
     $dbhost = '127.0.0.1';
     $dbuname = 'root';
     $dbpass = '';
@@ -7,29 +8,42 @@ function getMPChamps($patchVersion) {
 
     $beemo = new PDO('mysql:host=' . $dbhost . ';port=3306;dbname=' . $dbname, $dbuname, $dbpass);
 
-    $query = "CALL getChampsMostPlayed(" . $patchVersion. ")";
+    $query = "CALL getChampsMostPlayed(" . $patchVersion . ")";
 
-    try
-    {
-      ini_set('max_execution_time', 300);
-      $mostPlayed_stmt = $beemo->prepare($query);
-      $mostPlayed_stmt->execute();
-      $champsMP = $mostPlayed_stmt->fetchAll();
+    try {
+        ini_set('max_execution_time', 300);
+        $mostPlayed_stmt = $beemo->prepare($query);
+        $mostPlayed_stmt->execute();
+        $champsMP = $mostPlayed_stmt->fetchAll();
 
+    } catch (PDOException $ex) { // Error in database processing.
+        echo $sql . "<br>" . $error->getMessage(); // HTTP 500 - Internal Server Error
     }
-    catch (PDOException $ex)
-    { // Error in database processing.
-      echo $sql . "<br>" . $error->getMessage(); // HTTP 500 - Internal Server Error
+    if ($champsMP && $mostPlayed_stmt->rowCount() > 0) { ?>
+        <table>
+            <thead> Most Played Champions of the Patch
+            <tr>
+                <th>Rank</th>
+                <th>Champion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $index = 0;
+            foreach ($champsMP as $row) {
+                $index++; ?>
+                <tr>
+                    <td><?php echo "#" . $index; ?></td>
+                    <td><?php echo $row['name']; ?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <?php echo "<br>";
     }
-
-    if ($champsMP && $mostPlayed_stmt->rowCount() > 0) {
-      foreach ($champsMP as $row) {
-        echo $row['name'] . "<br>";
-      }   
-   	} 
-}
+} ?>
 
 
+<?php
 function getLPChamps($patchVersion)
 {
     $dbhost = '127.0.0.1';
@@ -50,15 +64,31 @@ function getLPChamps($patchVersion)
     } catch (PDOException $ex) { // Error in database processing.
         echo $sql . "<br>" . $error->getMessage(); // HTTP 500 - Internal Server Error
     }
-
-    if ($champsLP && $leastPlayed_stmt->rowCount() > 0) {
-        foreach ($champsLP as $row) {
-            echo $row['name'] . "<br>";
-        }
+    if ($champsLP && $leastPlayed_stmt->rowCount() > 0) { ?>
+        <table>
+            <thead> Least Played Champions of the Patch
+            <tr>
+                <th>Rank</th>
+                <th>Champion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $index = 0;
+            foreach ($champsLP as $row) {
+                $index++; ?>
+                <tr>
+                    <td><?php echo "#" . $index; ?></td>
+                    <td><?php echo $row['name']; ?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <?php echo "<br>";
     }
-}
+} ?>
 
 
+<?php
 function getMBChamps($patchVersion)
 {
     $dbhost = '127.0.0.1';
@@ -79,14 +109,31 @@ function getMBChamps($patchVersion)
     } catch (PDOException $ex) { // Error in database processing.
         echo $sql . "<br>" . $error->getMessage(); // HTTP 500 - Internal Server Error
     }
-
-    if ($champsMB && $mostBanned_stmt->rowCount() > 0) {
-        foreach ($champsMB as $row) {
-            echo $row['name'] . "<br>";
-        }
+    if ($champsMB && $mostBanned_stmt->rowCount() > 0) { ?>
+        <table>
+            <thead> Most Banned Champions of the Patch
+            <tr>
+                <th>Rank</th>
+                <th>Champion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $index = 0;
+            foreach ($champsMB as $row) {
+                $index++; ?>
+                <tr>
+                    <td><?php echo "#" . $index; ?></td>
+                    <td><?php echo $row['name']; ?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <?php echo "<br>";
     }
-}
+} ?>
 
+
+<?php
 function getLBChamps($patchVersion)
 {
     $dbhost = '127.0.0.1';
@@ -107,15 +154,31 @@ function getLBChamps($patchVersion)
     } catch (PDOException $ex) { // Error in database processing.
         echo $sql . "<br>" . $error->getMessage(); // HTTP 500 - Internal Server Error
     }
-
-    if ($champsLB && $leastBanned_stmt->rowCount() > 0) {
-        foreach ($champsLB as $row) {
-            echo $row['name'] . "<br>";
-        }
+    if ($champsLB && $leastBanned_stmt->rowCount() > 0) { ?>
+        <table>
+            <thead> Least Banned Champions of the Patch
+            <tr>
+                <th>Rank</th>
+                <th>Champion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $index = 0;
+            foreach ($champsLB as $row) {
+                $index++; ?>
+                <tr>
+                    <td><?php echo "#" . $index; ?></td>
+                    <td><?php echo $row['name']; ?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <?php echo "<br>";
     }
-}
+} ?>
 
 
+<?php
 function getBWChamps($patchVersion)
 {
     $dbhost = '127.0.0.1';
@@ -136,15 +199,31 @@ function getBWChamps($patchVersion)
     } catch (PDOException $ex) { // Error in database processing.
         echo $sql . "<br>" . $error->getMessage(); // HTTP 500 - Internal Server Error
     }
-
-    if ($champsBW && $bestWin_stmt->rowCount() > 0) {
-        foreach ($champsBW as $row) {
-            echo $row['name'] . "<br>";
-        }
+    if ($champsBW && $bestWin_stmt->rowCount() > 0) { ?>
+        <table>
+            <thead> Highest Winrate Champions of the Patch
+            <tr>
+                <th>Rank</th>
+                <th>Champion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $index = 0;
+            foreach ($champsBW as $row) {
+                $index++; ?>
+                <tr>
+                    <td><?php echo "#" . $index; ?></td>
+                    <td><?php echo $row['name']; ?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <?php echo "<br>";
     }
-}
+} ?>
 
 
+<?php
 function getWWChamps($patchVersion)
 {
     $dbhost = '127.0.0.1';
@@ -165,15 +244,31 @@ function getWWChamps($patchVersion)
     } catch (PDOException $ex) { // Error in database processing.
         echo $sql . "<br>" . $error->getMessage(); // HTTP 500 - Internal Server Error
     }
-
-    if ($champsWW && $worstWin_stmt->rowCount() > 0) {
-        foreach ($champsWW as $row) {
-            echo $row['name'] . "<br>";
-        }
+    if ($champsWW && $worstWin_stmt->rowCount() > 0) { ?>
+        <table>
+            <thead> Lowest Winrate Champions of the Patch
+            <tr>
+                <th>Rank</th>
+                <th>Champion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $index = 0;
+            foreach ($champsWW as $row) {
+                $index++; ?>
+                <tr>
+                    <td><?php echo "#" . $index; ?></td>
+                    <td><?php echo $row['name']; ?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <?php echo "<br>";
     }
-}
+} ?>
 
 
+<?php
 function getMPItems($patchVersion)
 {
     $dbhost = '127.0.0.1';
@@ -194,12 +289,25 @@ function getMPItems($patchVersion)
     } catch (PDOException $ex) { // Error in database processing.
         echo $sql . "<br>" . $error->getMessage(); // HTTP 500 - Internal Server Error
     }
-
-    if ($itemsMP && $itemsMP_stmt->rowCount() > 0) {
-        foreach ($itemsMP as $row) {
-            echo $row['name'] . "<br>";
-        }
+    if ($itemsMP && $itemsMP_stmt->rowCount() > 0) { ?>
+        <table>
+            <thead> Most Popular Items of the Patch
+            <tr>
+                <th>Rank</th>
+                <th>Item</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $index = 0;
+            foreach ($itemsMP as $row) {
+                $index++; ?>
+                <tr>
+                    <td><?php echo "#" . $index; ?></td>
+                    <td><?php echo $row['name']; ?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <?php echo "<br>";
     }
-}
-
-?>
+} ?>
