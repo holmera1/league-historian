@@ -50,58 +50,58 @@ try {
         <div id="container2">
             <div id="result11">
                 <div id="result1">
-                <?php if (isset($_POST['myPatch'])) {
-                    $selected_val = $_POST['myPatch'];
-                    getMPChamps($selected_val);
-                }
-                ?>
+                    <?php if (isset($_POST['myPatch'])) {
+                        $selected_val = $_POST['myPatch'];
+                        getMPChamps($selected_val);
+                    }
+                    ?>
                 </div>
                 <div id="result4">
-                <?php if (isset($_POST['myPatch'])) {
-                    $selected_val = $_POST['myPatch'];
-                    getLBChamps($selected_val);
-                }
-                ?>
+                    <?php if (isset($_POST['myPatch'])) {
+                        $selected_val = $_POST['myPatch'];
+                        getLBChamps($selected_val);
+                    }
+                    ?>
                 </div>
                 <div id="result7">
-                <?php if (isset($_POST['myPatch'])) {
-                    $selected_val = $_POST['myPatch'];
-                    getMPItems($selected_val);
-                }
-                ?>
+                    <?php if (isset($_POST['myPatch'])) {
+                        $selected_val = $_POST['myPatch'];
+                        getMPItems($selected_val);
+                    }
+                    ?>
                 </div>
             </div>
             <div id="result12">
                 <div id="result2">
-                <?php if (isset($_POST['myPatch'])) {
-                    $selected_val = $_POST['myPatch'];
-                    getLPChamps($selected_val);
-                }
-                ?>
-                 </div>
+                    <?php if (isset($_POST['myPatch'])) {
+                        $selected_val = $_POST['myPatch'];
+                        getLPChamps($selected_val);
+                    }
+                    ?>
+                </div>
                 <div id="result5">
-                <?php if (isset($_POST['myPatch'])) {
-                    $selected_val = $_POST['myPatch'];
-                    getBWChamps($selected_val);
-                }
-                ?>
+                    <?php if (isset($_POST['myPatch'])) {
+                        $selected_val = $_POST['myPatch'];
+                        getBWChamps($selected_val);
+                    }
+                    ?>
                 </div>
             </div>
             <div id="result13">
                 <div id="result3">
-                <?php if (isset($_POST['myPatch'])) {
-                    $selected_val = $_POST['myPatch'];
-                    
-                    getMBChamps($selected_val);
-                }
-                ?>
+                    <?php if (isset($_POST['myPatch'])) {
+                        $selected_val = $_POST['myPatch'];
+
+                        getMBChamps($selected_val);
+                    }
+                    ?>
                 </div>
                 <div id="result6">
-                <?php if (isset($_POST['myPatch'])) {
-                    $selected_val = $_POST['myPatch'];
-                    getWWChamps($selected_val);
-                }
-                ?>
+                    <?php if (isset($_POST['myPatch'])) {
+                        $selected_val = $_POST['myPatch'];
+                        getWWChamps($selected_val);
+                    }
+                    ?>
                 </div>
             </div>
         </div>
