@@ -25,6 +25,24 @@ IGNORE 1 LINES
     id
 );
 
+-- ITEMS
+DROP TABLE IF EXISTS items;
+CREATE TABLE items (
+	name TEXT,
+	id SMALLINT UNSIGNED,
+    CONSTRAINT pk_itemid PRIMARY KEY (id)
+);
+
+LOAD DATA INFILE 'c:/wamp64/tmp/items.csv'
+INTO TABLE items
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(
+	name,
+    id
+);
+
 -- MATCHES
 DROP TABLE IF EXISTS matches;
 CREATE TABLE matches (
@@ -372,24 +390,6 @@ IGNORE 1 LINES
     baronkills,
     dragonkills,
     harrykills
-);
-
--- ITEMS
-DROP TABLE IF EXISTS items;
-CREATE TABLE items (
-	name TEXT,
-	id SMALLINT UNSIGNED,
-    CONSTRAINT pk_itemid PRIMARY KEY (id)
-);
-
-LOAD DATA INFILE 'c:/wamp64/tmp/items.csv'
-INTO TABLE items
-FIELDS TERMINATED BY ','
-LINES TERMINATED BY '\n'
-IGNORE 1 LINES
-(
-	name,
-    id
 );
 
 -- ALLITEMS (NEEDED FOR POPULAR ITEMS PROCEDURE)

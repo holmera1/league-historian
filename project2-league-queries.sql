@@ -112,9 +112,9 @@ END //
 -- CALL getChampsWorstWinrate('7.10');
 
 -- Procedure 7: Most purchased items of the patch
-DROP PROCEDURE IF EXISTS getMostPopularItems2;
+DROP PROCEDURE IF EXISTS getMostPopularItems;
 DELIMITER //
-CREATE PROCEDURE getMostPopularItems2(IN p_version VARCHAR(20))
+CREATE PROCEDURE getMostPopularItems(IN p_version VARCHAR(20))
 BEGIN
 	SELECT name
 	FROM allItems
@@ -124,4 +124,4 @@ BEGIN
     LIMIT 5;
 END //
 
--- CALL getMostPopularItems2('7.6');
+-- CALL getMostPopularItems('7.5');
